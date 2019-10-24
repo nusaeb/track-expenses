@@ -1,4 +1,4 @@
-package com.trackexpenses.userexpenseinfo;
+package com.trackexpenses.expense;
 
 import java.time.LocalDate;
 
@@ -8,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ExpenseInfo {
+public class Expense {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long expenseInfoId;
+	private Long expenseId;
 	private String userId;
 	private String categoryId;
 	private String categoryItemId;
@@ -20,11 +20,11 @@ public class ExpenseInfo {
 	private Double amount;
 	private LocalDate occurrenceDate;
 	
-	public ExpenseInfo() {
+	public Expense() {
 		
 	}
 	
-	public ExpenseInfo(String userId, String categoryId, String categoryItemId, String categorySubItemId,
+	public Expense(String userId, String categoryId, String categoryItemId, String categorySubItemId,
 			Double amount, LocalDate occurrenceDate) {
 		super();
 		this.userId = userId;
@@ -34,13 +34,19 @@ public class ExpenseInfo {
 		this.amount = amount;
 		this.occurrenceDate = occurrenceDate;
 	}
-
-	public Long getExpenseInfoId() {
-		return expenseInfoId;
+	
+	public Expense(String categoryId, Double amount) {
+		super();
+		this.categoryId = categoryId;
+		this.amount = amount;
 	}
 
-	public void setExpenseInfoId(Long expenseInfoId) {
-		this.expenseInfoId = expenseInfoId;
+	public Long getExpenseId() {
+		return expenseId;
+	}
+
+	public void setExpenseId(Long expenseId) {
+		this.expenseId = expenseId;
 	}
 
 	public String getUserId() {

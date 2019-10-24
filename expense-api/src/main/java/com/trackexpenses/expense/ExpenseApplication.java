@@ -1,13 +1,13 @@
-package com.trackexpenses.userexpenseinfo;
+package com.trackexpenses.expense;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ExpenseInfoApplication {
+public class ExpenseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExpenseInfoApplication.class, args);
+		SpringApplication.run(ExpenseApplication.class, args);
 	}
 
 }

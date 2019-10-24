@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>expense-info-api</artifactId>
+	<artifactId>expense-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>expense-info-api</name>
+	<name>expense-api</name>
 	<description>Demo project for learning Spring Boot and Microservices</description>
 
 	<properties>
