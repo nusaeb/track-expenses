@@ -2,14 +2,21 @@ package com.trackexpenses.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity
 public class UserInfo {
 	
 	@Id
 	private String userId;
+	@NotBlank(message = "First name cannot be blank")
 	private String firstName;
+	@NotBlank(message = "Last name cannot be blank")
 	private String lastName;
+	@NotBlank(message = "Email cannot be blank")
+	@Email(message = "Invalid email format")
 	private String email;
 	private String mobileNumber;
 	

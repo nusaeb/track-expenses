@@ -2,6 +2,8 @@ package com.trackexpenses.user;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,22 +24,22 @@ public class UserController {
 	
 	@RequestMapping("/users/{userId}")
 	public UserInfo getUser(@PathVariable String userId) {
-		return userService.getUser(userId);
+		return userService.getUser(userId.trim());
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/users")
-	public void addUser(@RequestBody UserInfo user) {
+	public void addUser(@Valid @RequestBody UserInfo user) {
 		userService.addUser(user);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/users/{userId}")
-	public void updateUser(@RequestBody UserInfo user) {
+	public void updateUser(@Valid @RequestBody UserInfo user) {
 		userService.updateUser(user);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/users/{userId}")
 	public void deleteUser(@PathVariable String userId) {
-		userService.deleteUser(userId);
+		userService.deleteUser(userId.trim());
 	}
-
+	
 }
