@@ -2,15 +2,21 @@ package com.trackexpenses.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
+import com.trackexpenses.user.exception.UserNotFoundException;
 
 @Service
 public class UserService {
 	
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
+	
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	public List<UserInfo> getAllUsers(){
 		List<UserInfo> users = new ArrayList<UserInfo>();
@@ -18,20 +24,33 @@ public class UserService {
 		return users;
 	}
 	
-	public UserInfo getUser(String userId) {		
-		return userRepository.findById(userId).get();
+	public UserInfo getUser(String userId) {
+		Objects.requireNonNull(userId, "Cannot find user with null id!");
+		return userRepository.findById(userId)
+				.orElseThrow(
+						() -> new UserNotFoundException(userId));
 	}
 	
-	public void addUser(UserInfo user) {
-		userRepository.save(user);
+	public UserInfo addUser(UserInfo user) {
+		Objects.requireNonNull(user, "Cannot add null user!");
+		return userRepository.save(user);
 	}
 	
-	public void updateUser(UserInfo user) {
-		userRepository.save(user);
+	public UserInfo updateUser(UserInfo user) {
+		Objects.requireNonNull(user, "Cannot update null user!");
+		return userRepository.save(user);
 	}
 	
-	public void deleteUser(String userId) {
-		userRepository.deleteById(userId);
+	public String deleteUser(String userId) {
+		Objects.requireNonNull(userId, "Cannot delete user with null id!");
+		
+		try {
+			userRepository.deleteById(userId);
+			return "user deleted";		
+		}
+		catch(EmptyResultDataAccessException ex) {
+			throw new UserNotFoundException(userId);
+		}
 	}
 
 }
